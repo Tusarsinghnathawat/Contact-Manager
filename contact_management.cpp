@@ -22,7 +22,7 @@ int main() {
         cout << "4---> Delete Contact" << endl;
         cout << "0---> Exit" << endl;
         cin >> choice;
-        cin.ignore();  // Ignoring leftover newline from cin
+        cin.ignore();  
 
         switch (choice) {
             case '1':
@@ -109,7 +109,7 @@ void temp::searchContact() {
             cout << "Address      :: " << address << endl;
             cout << "Description  :: " << description << endl << endl;
             found = true;
-            break;  // Stop searching after finding the contact
+            break; 
         }
     }
 
@@ -131,7 +131,7 @@ void temp::deleteContact() {
     }
 
     fstream tempFile;
-    tempFile.open("temp.csv", ios::out); // Create a temporary file
+    tempFile.open("temp.csv", ios::out); 
 
     bool found = false;
     while (file.good()) {
@@ -144,7 +144,6 @@ void temp::deleteContact() {
             found = true;
             cout << "Deleting contact with Phone Number: " << phoneNo << endl;
         } else if (!phoneNo.empty()) {
-            // Write to temporary file if this is not the contact to be deleted
             tempFile << phoneNo << "," << Name << "," << address << "," << description << "\n";
         }
     }
@@ -153,12 +152,11 @@ void temp::deleteContact() {
     tempFile.close();
 
     if (found) {
-        // Replace original file with updated file
         remove("data.csv");
         rename("temp.csv", "data.csv");
         cout << "Contact deleted successfully!" << endl;
     } else {
         cout << "Contact not found!" << endl;
-        remove("temp.csv"); // No need to keep temporary file if no deletion
+        remove("temp.csv");
     }
 }
